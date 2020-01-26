@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthViewComponent } from './components/auth-view/auth-view.component';
-import { AuthViewLoginComponent } from './components/auth-view-login/auth-view-login.component';
-import { AuthViewRegistrationComponent } from './components/auth-view-registration/auth-view-registration.component';
 import { ProfilePageComponent } from './components/profile/profile-page/profile-page.component';
 import { UserLinkListComponent } from './components/links/user-link-list/user-link-list.component';
+import { AuthViewComponent } from './components/auth/auth-view/auth-view.component';
+import { AuthViewLoginComponent } from './components/auth/auth-view-login/auth-view-login.component';
+import { AuthViewRegistrationComponent } from './components/auth/auth-view-registration/auth-view-registration.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +24,10 @@ import { UserLinkListComponent } from './components/links/user-link-list/user-li
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
