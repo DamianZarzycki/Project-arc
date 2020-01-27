@@ -1,1 +1,10 @@
-<p>user-link-list works!</p>
+<table class="table table-striped">
+    <tr *ngFor="let url of userUrls; let i = index">
+
+        <td>{{i+1}}</td>
+        <td>
+
+            <app-user-link-list-item [url]="url"></app-user-link-list-item>
+        </td>
+    </tr>
+</table>

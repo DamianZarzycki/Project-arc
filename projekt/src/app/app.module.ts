@@ -10,6 +10,9 @@ import { AuthViewLoginComponent } from './components/auth/auth-view-login/auth-v
 import { AuthViewRegistrationComponent } from './components/auth/auth-view-registration/auth-view-registration.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UserLinkAddComponent } from './components/links/user-link-add/user-link-add.component';
+import { UserLinkCommentsComponent } from './components/links/user-link-comments/user-link-comments.component';
+import { UserLinkListItemComponent } from './components/links/user-link-list-item/user-link-list-item.component';
 
 
 
@@ -20,7 +23,10 @@ import { HttpClientModule } from '@angular/common/http';
     AuthViewLoginComponent,
     AuthViewRegistrationComponent,
     ProfilePageComponent,
-    UserLinkListComponent
+    UserLinkListComponent,
+    UserLinkAddComponent,
+    UserLinkCommentsComponent,
+    UserLinkListItemComponent
   ],
   imports: [
     BrowserModule,

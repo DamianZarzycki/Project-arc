@@ -74,8 +74,9 @@ export class AuthService {
     ).subscribe(
       (val) => {
         console.log("PUT call successful value returned in body", val);
-        localStorage.setItem('token', val)
-        this.router.navigate(['/mainView'])
+        localStorage.setItem('token', val.authToken)
+        localStorage.setItem('user_id', val.user_id)
+        this.router.navigate(['/profile'])
       },
       (response: Response) => {
         console.log("Response status: ", response.status);
