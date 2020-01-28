@@ -8,11 +8,13 @@ import { CantGoThereIfYouLoggedIn, AuthGuard } from './guards/auth-guard.guard';
 
 
 const routes: Routes = [
-  { path: '*', component: AuthViewComponent, canActivate: [CantGoThereIfYouLoggedIn] },
-  { path: '', component: AuthViewComponent, canActivate: [CantGoThereIfYouLoggedIn] },
-  { path: 'profile', component: ProfilePageComponent, canActivateChild: [AuthGuard] },
-  { path: 'userLinks', component: UserLinkListComponent, canActivateChild: [AuthGuard] },
-  { path: 'url/comments/:url', component: UserLinkCommentsComponent, canActivateChild: [AuthGuard] },
+  { path: '*', component: AuthViewComponent,
+  },
+  { path: '', component: AuthViewComponent, 
+},
+  { path: 'profile', component: ProfilePageComponent },
+  { path: 'userLinks', component: UserLinkListComponent },
+  { path: 'url/comments/:url', component: UserLinkCommentsComponent },
 ];
 
 @NgModule({

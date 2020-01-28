@@ -19,33 +19,30 @@ const url = `https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score`
 export class AuthService {
 
 
-
-
   private headers = new Headers({ "Content-Type": "text" });
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) { }
 
 
   public isUserSignedIn(): boolean {
-    return !_.isEmpty(sessionStorage.getItem(localStorage.getItem('user_id')));
+    return !_.isEmpty(localStorage.getItem(localStorage.getItem('user_id')));
   }
 
   logOut() {
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
     let headers = new HttpHeaders();
-    headers = headers.set('content-type', 'text');
+    headers = headers.set('content-type', 'text/html');
     return this.http.post<any>(url + `/logout`, null, { headers }
     ).subscribe(
       (val) => {
-        localStorage.removeItem('token');
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
       },
       (response: Response) => {
         if (response.status === 200) {
-          localStorage.removeItem('token');
-
-          this.router.navigate(['/'])
+          this.router.navigate(['/']);
         }
-
       });
   }
 

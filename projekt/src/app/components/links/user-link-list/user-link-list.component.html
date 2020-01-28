@@ -9,7 +9,7 @@
         <thead>
             <th>#</th>
             <th class="text-center">Comment url</th>
-
+            <th></th>
         </thead>
         <tbody>
             <tr *ngFor="let url of userUrls; let i = index">
@@ -17,7 +17,7 @@
                 <td>
                     <app-user-link-list-item [url]="url"></app-user-link-list-item>
                 </td>
-
+                <td (click)="deleteUrl(url)">&times;</td>
             </tr>
         </tbody>
     </table>

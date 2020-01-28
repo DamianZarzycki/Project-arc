@@ -71,4 +71,12 @@ export class RedditCommentsSentimentService {
         () => {
         });
   }
+
+  public deleteUrl<T>(user_id: string, url: string): Promise<T> {
+    const remUrl = `https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score/users/deleteLink?user_id=${user_id}&url=${url}`;
+
+    return this.http.post<T>(remUrl, {
+      'Content-Type': 'text'
+    }).toPromise();
+  }
 }

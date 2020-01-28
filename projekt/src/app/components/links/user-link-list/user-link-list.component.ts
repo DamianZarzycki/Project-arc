@@ -37,10 +37,18 @@ export class UserLinkListComponent implements OnInit, DoCheck {
     this.communication.numberOfComments$.subscribe(data =>
       this.userComments = data);
 
-    
-
   }
 
+
+  async deleteUrl(url: string) {
+    await this.redditService.deleteUrl(localStorage.getItem('user_id'), url);
+
+    this.redditService.getUserUrls(localStorage.getItem('user_id')).subscribe(
+      data => {
+        this.userUrls = data;
+
+      });
+  }
 
   ngDoCheck(): void {
 
