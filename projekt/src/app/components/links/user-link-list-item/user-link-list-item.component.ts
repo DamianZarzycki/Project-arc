@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { RedditCommentsSentimentService } from 'src/app/services/reddit-comments-sentiment.service';
 
 @Component({
   selector: 'app-user-link-list-item',
@@ -7,11 +8,21 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UserLinkListItemComponent implements OnInit {
 
-  @Input() url:string;
+  @Input() url: string;
+  @Output() urlComments: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  numberOfComments: number;
+
+  numberOfCommentsOfUrl;
+
+  constructor(private redditService: RedditCommentsSentimentService) { }
 
   ngOnInit() {
+    this.redditService.getNumberOfCommentsOfUrl(localStorage.getItem('user_id'), this.url).subscribe(data => {
+      this.numberOfCommentsOfUrl = data;
+
+    }
+    );
   }
 
 }

@@ -1,3 +1,11 @@
+.fa {
+  color: orangered;
+}
+
+* {
+  font-family: 'Barlow', sans-serif;
+}
+
 @keyframes ldio-a92ch2hwiin {
   0% {
     opacity: 1;

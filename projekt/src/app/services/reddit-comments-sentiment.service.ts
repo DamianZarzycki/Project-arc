@@ -17,7 +17,7 @@ export class RedditCommentsSentimentService {
 
   private headers = new Headers({ "Content-Type": "application/json" });
 
-  constructor(private http: HttpClient,private communication:CommunicationService) { }
+  constructor(private http: HttpClient, private communication: CommunicationService) { }
 
 
 
@@ -29,8 +29,6 @@ export class RedditCommentsSentimentService {
   }
 
   getUserUrlComments(user_id: string, url: string): Observable<any> {
-    console.log(url + `/user/url/comments?user_id=${user_id}&url=${url}`);
-
     return this.http.get<any>(`https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score/user/url/comments?user_id=${user_id}&url=${url}`)
       .pipe(map(
         (data) =>
@@ -38,9 +36,20 @@ export class RedditCommentsSentimentService {
   }
 
   getNumberOfComments(user_id): Observable<any> {
-    return this.http.get<any>(`https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score/user/url/numberOfComments?user_id=${user_id}`).pipe(map(
-      (data) =>
-        data
+    return this.http.get<any>(`https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score/user/url/numberOfComments?user_id=${user_id}`);
+  }
+
+  getNumberOfCommentsOfUrl(user_id, url): Observable<any> {
+    return this.http.get<any>(`https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score/user/url/numberOfCommentsOfUrl?user_id=${user_id}&url=${url}`);
+  }
+
+  getNumberOfUrls(user_id): Observable<any> {
+    return this.http.get<any>(`https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score/user/url/numberOfUrls?user_id=${user_id}`).pipe(map(
+      (data) => {
+        data;
+
+        this.communication.tellNumberOfUrls(data);
+      }
     ));
   }
 
@@ -49,15 +58,17 @@ export class RedditCommentsSentimentService {
     return this.http.post<any>(urll, {
       'Content-Type': 'application/json'
     })
-    .subscribe(
-      (val) => {
-        // this.openModalOnPostSuccess();
-        this.communication.tellSomethingToParent(false);
-      },
-      response => {
-        this.communication.tellSomethingToParent(false);
-      },
-      () => {
-      });
+      .subscribe(
+        (val) => {
+          // this.openModalOnPostSuccess();
+          this.communication.tellSomethingToParent(false);
+        },
+        response => {
+          this.communication.tellSomethingToParent(false);
+          this.getNumberOfComments(localStorage.getItem('user_id')).subscribe(() => { })
+          this.getNumberOfUrls(localStorage.getItem('user_id')).subscribe(() => { })
+        },
+        () => {
+        });
   }
 }

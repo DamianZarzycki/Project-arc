@@ -13,6 +13,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserLinkAddComponent } from './components/links/user-link-add/user-link-add.component';
 import { UserLinkCommentsComponent } from './components/links/user-link-comments/user-link-comments.component';
 import { UserLinkListItemComponent } from './components/links/user-link-list-item/user-link-list-item.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { BackBtnComponent } from './components/back-btn/back-btn.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CantGoThereIfYouLoggedIn, AuthGuard } from './guards/auth-guard.guard';
+import { BackLogoutComponent } from './components/back-logout/back-logout.component';
 
 
 
@@ -26,16 +32,25 @@ import { UserLinkListItemComponent } from './components/links/user-link-list-ite
     UserLinkListComponent,
     UserLinkAddComponent,
     UserLinkCommentsComponent,
-    UserLinkListItemComponent
+    UserLinkListItemComponent,
+    BackBtnComponent,
+    NotificationsComponent,
+    BackLogoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFontAwesomeModule,
+
+    NgbModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthGuard, CantGoThereIfYouLoggedIn, NgbActiveModal],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    NotificationsComponent,
+  ]
 })
 export class AppModule { }

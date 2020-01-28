@@ -9,6 +9,10 @@
   top: 0;
 }
 
+* {
+  font-family: 'Barlow', sans-serif;
+}
+
 /* Just common table stuff. Really. */
 table {
   border-collapse: collapse;
@@ -20,7 +24,6 @@ td {
   padding: 8px 16px;
 }
 
-.background {
-  background-color: #DAE0E6;
-  height: auto;
+a {
+  color: orangered;
 }

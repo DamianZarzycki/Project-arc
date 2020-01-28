@@ -1,0 +1,9 @@
+.btn {
+  color: black;
+  background-color: rgba(179, 179, 179, 0.85);
+  border-color: #515151;
+}
+
+.locationBack__arrow {
+  cursor: pointer;
+}

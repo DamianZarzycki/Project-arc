@@ -1,0 +1,12 @@
+$btn-font-color:rgba(179, 179, 179, 0.85);
+$btn-background-color:rgb(81, 81, 81);
+$btn-border-color: rgb(255, 170, 11);
+.btn {
+    color: black;
+    background-color: $btn-font-color;
+    border-color: $btn-background-color;
+}
+
+.locationBack__arrow {
+    cursor: pointer;
+}

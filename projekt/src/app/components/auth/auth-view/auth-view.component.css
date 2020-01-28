@@ -2,6 +2,10 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+a {
+  color: orangered;
+}
+
 .main-head {
   height: 150px;
   background: #FFF;
