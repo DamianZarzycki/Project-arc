@@ -37,7 +37,7 @@ export class AuthViewRegistrationComponent implements OnInit {
     ).subscribe(() => { },
       (err: Response) => {
         if (err.status === 200) {
-          this.openModal('Congrats!', 'Registration almost completed, check Your email box for to account activation details!')
+          this.openModal('Congrats!', 'Registration almost completed, check Your email box to finish registration process!');
         } else if (err.status === 401) {
           this.openModal('Ups!', 'Email already taken!');
 

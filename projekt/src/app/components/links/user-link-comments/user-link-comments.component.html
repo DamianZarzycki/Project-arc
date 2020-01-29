@@ -2,9 +2,10 @@
     <app-back-btn class="my-1"></app-back-btn>
     <app-back-logout></app-back-logout>
 
-    <h5 class="text-center">Here are your rated comments</h5>
+    <h4 class="text-center">Here are your rated comments</h4>
     <h6>
-        <a href="{{urlLink}}">Link to thread!</a>
+        <!-- <a href="{{urlLink}}">Link to thread!</a> -->
+        <a [href]="urlLink" target="_blank">Link to thread!</a>
     </h6>
     <div class="tableFixHead">
         <table class="table table-striped table-dark">
@@ -21,11 +22,11 @@
                     <td class="small">{{comment.id}}</td>
                     <td class="small">{{comment.comment}}</td>
                     <td class="small">{{comment.score | number: '0.0-8'}}</td>
-                    <td class="small" *ngIf="comment.score >= 0.5">Realy Positive</td>
+                    <td class="small" *ngIf="comment.score >= 0.5">Really Positive</td>
                     <td class="small" *ngIf="comment.score > 0 && comment.score < 0.5">Positive</td>
                     <td class="small" *ngIf="comment.score === 0">Neutral</td>
                     <td class="small" *ngIf="comment.score < 0 && comment.score > -0.5">Negative</td>
-                    <td class="small" *ngIf="comment.score <= -0.5 ">Realy Negative</td>
+                    <td class="small" *ngIf="comment.score <= -0.5 ">Really Negative</td>
                 </tr>
             </tbody>
         </table>

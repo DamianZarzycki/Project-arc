@@ -7,13 +7,14 @@
                     <div class="card-title mb-4">
                         <div class="d-flex justify-content-start">
                             <div class="image-container">
-                                <img class="profile__image" src='../assets/images/reddit.png' />
+                                <img class="profile__image" src='https://storage.cloud.google.com/arc-project-img/reddit.png' />
                                 <div class="middle">
 
                                 </div>
                             </div>
                             <div class="userData ml-3">
-                                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"> <a href="https://www.reddit.com/">Go to Reddit</a>
+
+                                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"> <a [href]="'https://www.reddit.com/'" target="_blank">Go to Reddit</a>
                                 </h2>
                                 <h6 class="d-block"><a [routerLink]="['/userLinks']">Go to Your added url's</a></h6>
                                 <span class="reddit__desc"><b>Reddit</b> is an American social news aggregation, web content rating, and discussion website. Registered members submit content to the site such as links, text posts, and images, which are then voted up or down by other members. Posts are organized by subject
@@ -21,9 +22,9 @@
                                     and, if they receive enough up-votes, ultimately on the site's front page. Despite strict rules prohibiting harassment, Reddit's administrators spend considerable resources on moderating the site.
                                 </span>
                             </div>
-                            <div class="ml-auto">
+                            <!-- <div class="ml-auto">
                                 <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 

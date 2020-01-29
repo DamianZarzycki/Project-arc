@@ -2,8 +2,11 @@
     <app-back-btn class="my-1"></app-back-btn>
     <app-back-logout></app-back-logout>
 
-    <h6 class="my-2 text-center">Number of Url's added <b>{{userUrls.length}}</b></h6>
-    <h6 class="my-1 text-center">Number of all Comments added <b> {{userComments}}</b></h6>
+    <div class="text-middle">
+        <h6 class="my-2">Number of Url's added: <b>{{userUrls.length}}</b></h6>
+        <h6 class="my-1">Number of all Comments added: <b> {{userComments}}</b></h6>
+    </div>
+
     <div *ngIf="userUrls.length===0">
         <a [routerLink]="['/profile']">Go ahead and add something</a>
     </div>
@@ -11,11 +14,11 @@
     <table class="table table-dark">
         <thead>
             <th>#</th>
-            <th class="text-center">Comment url</th>
+            <th class="text-center">Comment of this url</th>
             <th></th>
         </thead>
         <tbody>
-            <tr *ngFor="let url of userUrls; let i = index">
+            <tr *ngFor="let url of userUrls; let i = index" class="text-centers">
                 <td>{{i+1}}</td>
                 <td>
                     <app-user-link-list-item [url]="url"></app-user-link-list-item>

@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../services/auth.service'
-  ;
+;
 import { NotificationsComponent } from '../components/notifications/notifications.component';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     private authService: AuthService,
     private modalService: NgbModal) { }
 
-  open(title:string, body:string) {
+  open(title: string, body: string) {
 
     const modalRef = this.modalService.open(NotificationsComponent);
     modalRef.componentInstance.title = title;
@@ -23,11 +23,11 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
- 
-    if(localStorage.getItem('token')){
+
+    if (localStorage.getItem('token')) {
       return true;
     }
-    this.open("Ups","Cant go there..");
+    this.open("Ups", "Cant go there..");
 
     this.router.navigate(['/']);
     return false;
@@ -43,20 +43,23 @@ export class CantGoThereIfYouLoggedIn implements CanActivate {
     private authService: AuthService,
     private modalService: NgbModal) { }
 
-  open() {
+  open(title: string, body: string) {
+
     const modalRef = this.modalService.open(NotificationsComponent);
-    modalRef.componentInstance.title = 'Upss..';
-    modalRef.componentInstance.message = 'You are already logged in!';
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = body;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    if (!this.authService.isUserSignedIn()) {
-      this.open();
-      this.router.navigate(['profile']);
+    if (localStorage.getItem('token')) {
+      this.open("Ups", "Cant go there..");
+      this.router.navigate(['/profile']);
+
       return false;
     }
 
     return true;
+
   }
 };

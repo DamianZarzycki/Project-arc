@@ -9,10 +9,10 @@ import { CantGoThereIfYouLoggedIn, AuthGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   {
-    path: '*', component: AuthViewComponent,
+    path: '*', component: AuthViewComponent, canActivate: [CantGoThereIfYouLoggedIn]
   },
   {
-    path: '', component: AuthViewComponent,
+    path: '', component: AuthViewComponent, canActivate: [CantGoThereIfYouLoggedIn]
   },
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
   { path: 'userLinks', component: UserLinkListComponent, canActivate: [AuthGuard] },

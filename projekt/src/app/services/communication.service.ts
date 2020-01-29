@@ -20,14 +20,14 @@ export class CommunicationService {
 
 
   tellNumberOfComments(amount: number): void {
-    this.commentsSource.next(amount);
+    // this.commentsSource.next(amount);
   }
 
   tellNumberOfUrls(amount: number): void {
-    this.urlsSource.next(amount);
+    // this.urlsSource.next(amount);
   }
 
   tellSomethingToParent(message: boolean): void {
-    this.messageSource.next(message);
+     this.messageSource.next(message);
   }
 }

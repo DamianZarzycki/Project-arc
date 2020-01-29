@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsComponent } from '../components/notifications/notifications.component';
+import { BigqueryService } from './bigquery.service';
 
 
 const url = `https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score`
@@ -22,30 +23,18 @@ export class AuthService {
   headers = new HttpHeaders();
 
 
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal) { }
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, private bigqueryService: BigqueryService) { }
 
 
   public isUserSignedIn(): boolean {
-    return !_.isEmpty(localStorage.getItem(localStorage.getItem('user_id')));
+    if (localStorage.getItem('token')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  // logOut() {
 
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('user_id');
-  //   let headers = new HttpHeaders();
-  //   headers = headers.set('content-type', 'text/html');
-  //   return this.http.post<any>(url + `/logout`, null, { headers }
-  //   ).subscribe(
-  //     (val) => {
-  //       this.router.navigate(['/']);
-  //     },
-  //     (response: Response) => {
-  //       if (response.status === 200) {
-  //         this.router.navigate(['/']);
-  //       }
-  //     });
-  // }
 
   logOut() {
     let headers = new HttpHeaders();
@@ -60,6 +49,7 @@ export class AuthService {
       (response: Response) => {
 
         if (response.status === 200) {
+
           localStorage.clear();
 
           this.router.navigate(['/']);
@@ -76,8 +66,6 @@ export class AuthService {
   }
 
   login(body) {
-    console.log('heej kobe');
-    
     return this.http.post<any>
       (url + `/login`, body, { headers: this.headers });
   }
@@ -87,51 +75,5 @@ export class AuthService {
       (url + `/register`, body, { headers: this.headers });
   }
 
-  // register(email: string, password: string) {
-  //   let headers = new HttpHeaders();
-  //   headers = headers.set('content-type', 'text');
 
-  //   return this.http.post<any>(url + `/register?email=${email}&password=${password}`, {
-  //     'Content-Type': 'application/json'
-  //   }).subscribe(
-  //     (val) => {
-  //       this.openModalOnPostSuccess('Ups', 'Something went wrong.. error: ' + val);
-
-  //     },
-  //     (response: Response) => {
-  //       if (response.status === 200) {
-  //         this.openModalOnPostSuccess('Congrats', 'You have registered successfully, please activate Your account in mail message!' + response.status);
-  //       } else {
-  //         this.openModalOnPostSuccess('Ups', 'Something went wrong.. status: ' + response.status);
-  //       }
-  //     }
-  //   );
-  // }
-
-
-  // login(email: string, password: string) {
-  //   let headers = new HttpHeaders();
-  //   headers = headers.set('content-type', 'text');
-  //   return this.http.post<any>(url + `/login?email=${email}&password=${password}`, null, { headers }
-  //   ).subscribe(
-  //     (val) => {
-  //       localStorage.setItem('token', val.authToken)
-  //       localStorage.setItem('user_id', val.user_id)
-  //       this.router.navigate(['/profile'])
-  //     },
-  //     (response: Response) => {
-
-  //       if (response.status != 200) {
-  //         this.openModalOnPostSuccess('Ups', 'Something went wrong.. status: ' + response.status);
-
-  //         this.router.navigate(['/'])
-  //       } else {
-  //         this.router.navigate(['/profile'])
-
-  //       }
-
-  //     },
-  //     () => {
-  //     });
-  // }
 }

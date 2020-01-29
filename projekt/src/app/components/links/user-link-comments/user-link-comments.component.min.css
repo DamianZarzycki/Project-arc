@@ -1,1 +1,1 @@
-.tableFixHead{overflow-y:auto;height:30em}.tableFixHead thead th{background-color:#FF5700;position:sticky;top:0}*{font-family:'Barlow', sans-serif}table{border-collapse:collapse;width:100%}th,td{padding:8px 16px}a{color:orangered}
+.tableFixHead{overflow-y:auto;height:30em}.tableFixHead thead th{background-color:#FF5700;position:sticky;top:0}*{font-family:'Barlow', sans-serif}table{border-collapse:collapse;width:100%}th,td{padding:8px 16px;max-width:400px;overflow:hidden}a{color:orangered}

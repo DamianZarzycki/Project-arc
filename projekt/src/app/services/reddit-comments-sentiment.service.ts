@@ -6,6 +6,9 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { CommunicationService } from './communication.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationsComponent } from '../components/notifications/notifications.component';
+import { BigqueryService } from './bigquery.service';
 
 
 const url = `https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score`
@@ -15,11 +18,20 @@ const url = `https://sentimentapi-dot-arc-pjatk.appspot.com/project/v1/score`
 })
 export class RedditCommentsSentimentService {
 
+
   private headers = new Headers({ "Content-Type": "application/json" });
 
-  constructor(private http: HttpClient, private communication: CommunicationService) { }
+  constructor(
+    private http: HttpClient,
+    private communication: CommunicationService,
+    private modalService: NgbModal,
+    private bigqueryService: BigqueryService) { }
 
-
+  openModal(title: string, message: string) {
+    const modalRef = this.modalService.open(NotificationsComponent);
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = message;
+  }
 
   getUserUrls(user_id: string): Observable<any> {
     return this.http.get<any>(url + `/user/urls?user_id=${user_id}`)
@@ -63,10 +75,29 @@ export class RedditCommentsSentimentService {
           // this.openModalOnPostSuccess();
           this.communication.tellSomethingToParent(false);
         },
-        response => {
+        (response: Response) => {
+          if (response.status === 500) {
+            this.openModal('Ups', 'You entered wrong/empty url or some comments are not in english so pick another thread');
+          }
           this.communication.tellSomethingToParent(false);
-          this.getNumberOfComments(localStorage.getItem('user_id')).subscribe(() => { })
-          this.getNumberOfUrls(localStorage.getItem('user_id')).subscribe(() => { })
+          this.getNumberOfComments(localStorage.getItem('user_id')).subscribe(() => { });
+          this.getNumberOfUrls(localStorage.getItem('user_id')).subscribe(() => { });
+          if (response.status === 200) {
+
+
+            this.getNumberOfCommentsOfUrl(localStorage.getItem('user_id'), localStorage.getItem('url')).subscribe((data) => {
+
+
+              // this.bigqueryService.setNumberOfComments(data);
+              this.bigqueryService.addToStatistics({
+                "user_id": localStorage.getItem('user_id'),
+                "number_of_comments_added": data
+              });
+            });
+
+
+            this.openModal('Success', "Link was added to Your database!");
+          }
         },
         () => {
         });

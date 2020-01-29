@@ -23,7 +23,6 @@ export class ProfilePageComponent implements OnInit, DoCheck, AfterViewChecked {
     this.numberOfUserUrls = amount;
   }
   setNumberOfUserComments(amount: number) {
-    console.log('przejalem ilosc comentsow');
     this.communication.numberOfComments$.subscribe(data => this.numberOfUserComments = data)
 
     this.numberOfUserComments = amount;
