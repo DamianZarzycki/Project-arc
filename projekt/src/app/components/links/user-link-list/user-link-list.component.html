@@ -4,6 +4,9 @@
 
     <h6 class="my-2 text-center">Number of Url's added <b>{{userUrls.length}}</b></h6>
     <h6 class="my-1 text-center">Number of all Comments added <b> {{userComments}}</b></h6>
+    <div *ngIf="userUrls.length===0">
+        <a [routerLink]="['/profile']">Go ahead and add something</a>
+    </div>
     <hr>
     <table class="table table-dark">
         <thead>
@@ -17,7 +20,7 @@
                 <td>
                     <app-user-link-list-item [url]="url"></app-user-link-list-item>
                 </td>
-                <td (click)="deleteUrl(url)">&times;</td>
+
             </tr>
         </tbody>
     </table>

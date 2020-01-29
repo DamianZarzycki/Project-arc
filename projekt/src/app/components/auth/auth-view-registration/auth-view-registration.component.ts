@@ -13,9 +13,14 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 export class AuthViewRegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   constructor(private fb: FormBuilder,
-    private auth: AuthService,
+    private auth: AuthService, private modalService: NgbModal
   ) { }
 
+  openModal(title: string, message: string) {
+    const modalRef = this.modalService.open(NotificationsComponent);
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = message;
+  }
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
@@ -26,7 +31,22 @@ export class AuthViewRegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.auth.register(this.registrationForm.get('email').value, this.registrationForm.get('password').value);
+    let email = this.registrationForm.get('email').value;
+    let password = this.registrationForm.get('password').value;
+    this.auth.register({ email: email, password: password },
+    ).subscribe(() => { },
+      (err: Response) => {
+        if (err.status === 200) {
+          this.openModal('Congrats!', 'Registration almost completed, check Your email box for to account activation details!')
+        } else if (err.status === 401) {
+          this.openModal('Ups!', 'Email already taken!');
+
+        } else {
+          this.openModal('Ups!', 'Something went wrong..! ');
+        }
+      }
+
+    );
   }
 
 }

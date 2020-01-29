@@ -27,6 +27,9 @@ export class UserLinkListComponent implements OnInit, DoCheck {
 
     );
 
+    this.redditService.getNumberOfUrls(localStorage.getItem('user_id')).subscribe(data =>
+      this.numberOfCommentsOfUrl = data);
+
     this.redditService.getUserUrls(localStorage.getItem('user_id')).subscribe(
       data => {
         this.userUrls = data;
@@ -34,25 +37,23 @@ export class UserLinkListComponent implements OnInit, DoCheck {
       }
     );
 
-    this.communication.numberOfComments$.subscribe(data =>
-      this.userComments = data);
+    // this.communication.numberOfComments$.subscribe(data =>
+    //   this.userComments = data);
 
   }
 
 
-  async deleteUrl(url: string) {
-    await this.redditService.deleteUrl(localStorage.getItem('user_id'), url);
 
-    this.redditService.getUserUrls(localStorage.getItem('user_id')).subscribe(
-      data => {
-        this.userUrls = data;
-
-      });
-  }
 
   ngDoCheck(): void {
+    // this.redditService.getUserUrls(localStorage.getItem('user_id')).subscribe(
+    //   data => {
+    //     this.userUrls = data;
 
-
+    //   }
+    // );
+    // this.redditService.getNumberOfUrls(localStorage.getItem('user_id')).subscribe(data =>
+    //   this.numberOfCommentsOfUrl = data);
 
   }
 

@@ -15,20 +15,21 @@ export class AuthGuard implements CanActivate {
     private authService: AuthService,
     private modalService: NgbModal) { }
 
-  open() {
+  open(title:string, body:string) {
 
     const modalRef = this.modalService.open(NotificationsComponent);
-    modalRef.componentInstance.title = 'User Unauthorized!';
-    modalRef.componentInstance.message = 'You need to log in first!';
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = body;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.isUserSignedIn()) {
+ 
+    if(localStorage.getItem('token')){
       return true;
     }
-    this.open();
-    // this.router.navigate(['']);
+    this.open("Ups","Cant go there..");
 
+    this.router.navigate(['/']);
     return false;
 
   }
